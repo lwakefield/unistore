@@ -28,8 +28,8 @@ export function connect(mapStateToProps, actions) {
 			let { store } = context;
 			let state = mapStateToProps(store ? store.getState() : {}, props);
 			let boundActions = actions ? mapActions(actions, store) : { store };
-			let update = () => {
-				let mapped = mapStateToProps(store ? store.getState() : {}, this.props);
+			let update = (props) => {
+				let mapped = mapStateToProps(store ? store.getState() : {}, props);
 				for (let i in mapped) if (mapped[i]!==state[i]) {
 					state = mapped;
 					return this.forceUpdate();
@@ -40,11 +40,14 @@ export function connect(mapStateToProps, actions) {
 				}
 			};
 			this.componentDidMount = () => {
-				store.subscribe(update);
+				store.subscribe(update.bind(null, this.props));
 			};
 			this.componentWillUnmount = () => {
-				store.unsubscribe(update);
+				store.subscribe(update.bind(null, this.props));
 			};
+			this.componentWillReceiveProps = nextProps => {
+				update(nextProps);
+			}
 			this.render = () => createElement(Child, assign(assign(assign({}, boundActions), this.props), state));
 		}
 		Wrapper.contextTypes = CONTEXT_TYPES;

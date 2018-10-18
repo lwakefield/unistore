@@ -23,8 +23,8 @@ export function connect(mapStateToProps, actions) {
 		function Wrapper(props, { store }) {
 			let state = mapStateToProps(store ? store.getState() : {}, props);
 			let boundActions = actions ? mapActions(actions, store) : { store };
-			let update = () => {
-				let mapped = mapStateToProps(store ? store.getState() : {}, this.props);
+			let update = (props) => {
+				let mapped = mapStateToProps(store ? store.getState() : {}, props);
 				for (let i in mapped) if (mapped[i]!==state[i]) {
 					state = mapped;
 					return this.setState(null);
@@ -35,11 +35,14 @@ export function connect(mapStateToProps, actions) {
 				}
 			};
 			this.componentDidMount = () => {
-				store.subscribe(update);
+				store.subscribe(update.bind(null, this.props));
 			};
 			this.componentWillUnmount = () => {
-				store.unsubscribe(update);
+				store.subscribe(update.bind(null, this.props));
 			};
+			this.componentWillReceiveProps = nextProps => {
+				update(nextProps);
+			}
 			this.render = props => h(Child, assign(assign(assign({}, boundActions), props), state));
 		}
 		return (Wrapper.prototype = new Component()).constructor = Wrapper;
