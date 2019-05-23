@@ -88,7 +88,7 @@
     "babel-jest": "^21.2.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
-    "bundlesize": "^0.15.3",
+    "bundlesize": "^0.17.2",
     "documentation": "^4.0.0",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.1",
