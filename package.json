@@ -92,7 +92,7 @@
     "documentation": "^4.0.0",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^4.16.0",
+    "eslint": "^7.13.0",
     "eslint-config-developit": "^1.1.1",
     "gzip-size-cli": "^2.1.0",
     "jest": "^22.1.4",
