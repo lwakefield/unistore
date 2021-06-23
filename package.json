@@ -85,7 +85,7 @@
   "author": "Jason Miller <jason@developit.ca>",
   "license": "MIT",
   "devDependencies": {
-    "babel-jest": "^21.2.0",
+    "babel-jest": "^27.0.5",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "bundlesize": "^0.15.3",
